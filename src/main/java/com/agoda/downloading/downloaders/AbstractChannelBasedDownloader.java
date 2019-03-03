@@ -1,7 +1,7 @@
-package com.agoda.loader.imp;
+package com.agoda.downloading.downloaders;
 
-import com.agoda.loader.services.FileService;
-import com.agoda.loader.DownloadingResult;
+import com.agoda.downloading.domain.DownloadingResult;
+import com.agoda.filesoperations.services.IOService;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
@@ -10,32 +10,29 @@ import java.nio.channels.ReadableByteChannel;
 import java.nio.file.Path;
 
 @Slf4j
-abstract class AbstractLoaderToFile implements Loader {
+abstract class AbstractChannelBasedDownloader implements Downloader {
 
-    private final FileService fileService;
+    protected final IOService ioService;
 
-    protected AbstractLoaderToFile(FileService fileService) {
-        this.fileService = fileService;
+    protected AbstractChannelBasedDownloader(IOService ioService) {
+        this.ioService = ioService;
     }
 
     @Override
-    public DownloadingResult load(URL from, Path to) {
+    public DownloadingResult download(URL from, Path to) {
 
         DownloadingResult result = new DownloadingResult();
         result.setFilePath(to);
 
         try {
             ReadableByteChannel readableByteChannel = openChannelToResource(from);
-            fileService.writeToFile(to, readableByteChannel);
+            ioService.writeToFile(to, readableByteChannel);
             log.info("Saved information from {} to {}", from, to);
-
-
-
             result.setSuccessful(true);
-        } catch (IOException e) {
+        } catch (Throwable e) {
             log.error("Exception occurred during processing.", e);
             log.info("Will try to delete file.");
-            fileService.deleteFile(to);
+            ioService.deleteFile(to);
         }
         return result;
     }

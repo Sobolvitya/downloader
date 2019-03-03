@@ -1,4 +1,4 @@
-package com.agoda.loader.exception;
+package com.agoda.downloading.exception;
 
 public class WrongResourcesException extends RuntimeException {
 
