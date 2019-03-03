@@ -8,7 +8,7 @@ import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
 
-class ApplicationTest extends Specification {
+class ApplicationIntTest extends Specification {
 
     private static final GenericContainer fileServer =
 		new GenericContainer("halverneus/static-file-server")

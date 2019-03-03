@@ -14,7 +14,6 @@ public class DownloaderFactoryImpl implements DownloaderFactory {
     static {
         ChannelBasedDownloader downloader = new ChannelBasedDownloader(IOServiceImpl.getIOService());
         loaders.put("http", downloader);
-        loaders.put("https", downloader);
         loaders.put("ftp", downloader);
         loaders.put("sftp", downloader);
     }
