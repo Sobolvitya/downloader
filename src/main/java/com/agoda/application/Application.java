@@ -4,7 +4,7 @@ import com.agoda.application.domain.ApplicationArguments;
 import com.agoda.application.parsers.ApplicationArgumentParser;
 import com.agoda.downloading.downloaders.DownloaderFactoryImpl;
 import com.agoda.downloading.services.ResourceDownloaderService;
-import com.agoda.filesoperations.services.FileServiceFactory;
+import com.agoda.filesoperations.services.IOServiceFactory;
 import lombok.extern.slf4j.Slf4j;
 
 import static java.util.Objects.isNull;
@@ -22,7 +22,7 @@ public class Application {
                 return;
             }
 
-            ResourceDownloaderService resourceDownloader = new ResourceDownloaderService(FileServiceFactory.getFileService(), new DownloaderFactoryImpl());
+            ResourceDownloaderService resourceDownloader = new ResourceDownloaderService(IOServiceFactory.getIOService(), new DownloaderFactoryImpl());
 
             resourceDownloader.download(applicationArguments.getFolderPath(), applicationArguments.getResources(), Boolean.parseBoolean(applicationArguments.getIgnoreWrongResource()));
 

@@ -1,6 +1,6 @@
 package com.agoda.downloading.downloaders;
 
-import com.agoda.filesoperations.services.FileServiceFactory;
+import com.agoda.filesoperations.services.IOServiceFactory;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,7 +12,7 @@ public class DownloaderFactoryImpl implements DownloaderFactory {
     private static final Downloader NOOP_DOWNLOADER = new NoopDownloader();
 
     static {
-        ChannelBasedDownloader downloader = new ChannelBasedDownloader(FileServiceFactory.getFileService());
+        ChannelBasedDownloader downloader = new ChannelBasedDownloader(IOServiceFactory.getIOService());
         loaders.put("http", downloader);
         loaders.put("ftp", downloader);
         loaders.put("sftp", downloader);

@@ -82,7 +82,7 @@ public class ResourceDownloaderService implements AutoCloseable {
 
             Path filePath = buildFilePath(folderPath, resourcesUrl);
 
-            if (canProcess(filePath) && !usedPaths.contains(filePath)) {
+            if (isProcessable(filePath) && !usedPaths.contains(filePath)) {
                 resourceDetails.add(ResourceDetails.builder()
                         .filePath(filePath)
                         .url(resourcesUrl)
@@ -134,7 +134,7 @@ public class ResourceDownloaderService implements AutoCloseable {
         return (protocol + host + file).replace("/", "_");
     }
 
-    private boolean canProcess(Path filePath) {
+    private boolean isProcessable(Path filePath) {
         if (IOService.exists(filePath)) {
             if (!IOService.isWritable(filePath)) {
                 log.error("Unable to write to the file - {}", filePath);

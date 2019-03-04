@@ -2,9 +2,9 @@ package com.agoda.filesoperations.services;
 
 import com.agoda.filesoperations.services.impl.IOServiceImpl;
 
-public class FileServiceFactory {
+public class IOServiceFactory {
 
-    public static IOService getFileService() {
+    public static IOService getIOService() {
         return IOServiceImpl.getIOService();
     }
 }
